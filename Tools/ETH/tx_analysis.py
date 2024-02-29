@@ -25,6 +25,7 @@ def sign_transaction(from_address, to_address, value):
 
     # 2. 签名交易
     signed = w3.eth.account.sign_transaction(transaction, pk)
+    print("signed成功，raw transaction: ", signed.rawTransaction.hex())
     # 3. 发送交易
     tx_hash = w3.eth.send_raw_transaction(signed.rawTransaction)
     # 4. 根据交易hash查询交易
