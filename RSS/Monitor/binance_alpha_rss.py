@@ -12,6 +12,8 @@ RSS_URLS = [
     "https://rss.panewslab.com/zh/tvsq/rss"
 ]
 BARK_API = "https://api.day.app/device_id/标题/Binance-Alpha-积分-监控"
+
+# 和 BARK——API一样从环境变量中获取
 STORAGE_FILE = "processed_entries.txt"
 
 
@@ -67,8 +69,9 @@ def send_notification(title, description=None):
 if __name__ == "__main__":
     # 从环境变量取 device_id
     device_id = os.getenv('BARK_DEVICE_ID')
+    store_pre = os.getenv('BARK_MONITOR_BINANCE_ALPHA')
     BARK_API = BARK_API.replace('device_id', device_id) if device_id else BARK_API
-
+    STORAGE_FILE = store_pre + "/" + STORAGE_FILE
     while True:
         check_rss()
         time.sleep(300)  # 每5分钟检查一次
